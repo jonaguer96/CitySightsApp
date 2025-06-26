@@ -35,16 +35,6 @@
 			path = "CitySights App";
 			sourceTree = "<group>";
 		};
-		9A1CCBCB2E0CF37300208547 /* CitySights AppTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "CitySights AppTests";
-			sourceTree = "<group>";
-		};
-		9A1CCBD52E0CF37300208547 /* CitySights AppUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "CitySights AppUITests";
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				9A1CCBBA2E0CF37100208547 /* CitySights App */,
-				9A1CCBCB2E0CF37300208547 /* CitySights AppTests */,
-				9A1CCBD52E0CF37300208547 /* CitySights AppUITests */,
 				9A1CCBB92E0CF37100208547 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,9 +118,6 @@
 			dependencies = (
 				9A1CCBCA2E0CF37300208547 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				9A1CCBCB2E0CF37300208547 /* CitySights AppTests */,
-			);
 			name = "CitySights AppTests";
 			packageProductDependencies = (
 			);
@@ -152,9 +137,6 @@
 			);
 			dependencies = (
 				9A1CCBD42E0CF37300208547 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				9A1CCBD52E0CF37300208547 /* CitySights AppUITests */,
 			);
 			name = "CitySights AppUITests";
 			packageProductDependencies = (
