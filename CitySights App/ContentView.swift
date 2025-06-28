@@ -21,10 +21,19 @@ struct ContentView: View {
                 // TODO: Implement Query
             } label: {
                 Text("Go")
+                    .padding(.horizontal)
+                    .padding(.vertical, 10)
+                    .background(.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                
             }
 
         }
         .padding()
+        .onAppear(perform: {
+            print(Bundle.main.infoDictionary?["API_KEY"] as? String)
+        })
     }
 }
 
