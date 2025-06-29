@@ -15,7 +15,7 @@ struct DataService {
         
         // Check if API key exists
         guard apiKey != nil else {
-            return
+            return [Business]()
         }
         
         // 1. Create url
@@ -42,10 +42,9 @@ struct DataService {
             catch {
                 print(error)
             }
-            
         }
-
         
+        return [Business]()
     }
     
 }
