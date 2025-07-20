@@ -15,12 +15,10 @@ struct HomeView: View {
     var body: some View {
         
         @Bindable var model = model
-        
         VStack {
             HStack {
                 TextField("What are you looking for?", text: $model.query)
                     .textFieldStyle(.roundedBorder)
-                
                 Button {
                     // TODO: Implement Query
                 } label: {
@@ -32,7 +30,6 @@ struct HomeView: View {
                         .cornerRadius(10)
                 }
             }
-            
             //Show picker
             Picker ("", selection: $selectedTab) {
                 Text("List")
@@ -41,16 +38,13 @@ struct HomeView: View {
                     .tag(1)
             }
             .pickerStyle(SegmentedPickerStyle())
-            
             //Show map or list
-            
             if selectedTab == 1 {
                 MapView()
             }
             else {
                 ListView()
             }
-            
         }
         .onAppear {
             model.getBusinesses()
@@ -58,7 +52,6 @@ struct HomeView: View {
         .sheet(item: $model.selectedBusiness) { item in
             BusinessDetailView()
         }
-        
     }
 }
 
