@@ -54,7 +54,7 @@ struct OnboardingViewDetails: View {
 }
 
 #Preview {
-    OnboardingViewDetails(bgColor: Color(red: 111/255, green: 154/255, blue: 189/255), headline: "Welcome to CitySights", subheadline: "City sights helps you find the best of the city!") {
+    OnboardingViewDetails(bgColor: Color(red: 111/255, green: 154/255, blue: 189/255), headline: "Welcome to CitySights!", subheadline: "City sights helps you find the best of the city!") {
         //Nothing
     }
 }

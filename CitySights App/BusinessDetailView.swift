@@ -14,7 +14,7 @@ struct BusinessDetailView: View {
     var body: some View {
         
         let business = model.selectedBusiness
-        
+
         VStack (spacing: 0) {
             
             ZStack (alignment: .trailing) {
