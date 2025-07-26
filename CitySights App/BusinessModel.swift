@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
 
 
 @Observable 
@@ -17,6 +18,7 @@ class BusinessModel {
     var selectedBusiness: Business?
     
     var service = DataService()
+    var locationManager = CLLocationManager()
     
     func getBusinesses() {
         
@@ -24,6 +26,16 @@ class BusinessModel {
             businesses = await service.businessSearch()
         }
         
+    }
+    
+    func getUserLocation() {
+        // Check if we have permission
+        if locationManager.authorizationStatus == .authorizedWhenInUse {
+            locationManager.requestLocation()
+        }
+        else {
+            locationManager.requestWhenInUseAuthorization()
+        }
     }
     
 }
