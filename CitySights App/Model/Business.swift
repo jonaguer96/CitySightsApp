@@ -14,7 +14,7 @@ struct Business: Decodable, Identifiable {
     var coordinates: Coordinate?
     var displayPhone: String?
     var distance: Double?
-    var imageURL: String?
+    var imageUrl: String?
     var isClosed: Bool?
     var location: Location?
     var name: String?
@@ -28,7 +28,7 @@ struct Business: Decodable, Identifiable {
         
         case displayPhone = "display_phone"
         case isClosed = "is_closed"
-        case imageURL = "image_url"
+        case imageUrl = "image_url"
         case reviewCount = "review_count"
         
         case id
