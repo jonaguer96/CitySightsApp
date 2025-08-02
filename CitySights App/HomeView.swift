@@ -11,6 +11,9 @@ struct HomeView: View {
     
     @Environment(BusinessModel.self) var model
     @State var selectedTab = 0
+    @State var popularOn = false
+    @State var dealsOn = false
+    @State var categorySelection = "restaurants"
     
     var body: some View {
         
@@ -24,12 +27,34 @@ struct HomeView: View {
                 } label: {
                     Text("Go")
                         .padding(.horizontal)
-                        .padding(.vertical, 10)
+                        .frame(height: 32)
                         .background(.blue)
                         .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .cornerRadius(6)
                 }
             }
+            .padding(.horizontal)
+            
+            // Query options
+            VStack {
+                Toggle("Popular", isOn: $popularOn)
+                Toggle("Deals", isOn: $dealsOn)
+                
+                HStack {
+                    Text("Categories")
+                    Spacer()
+                    Picker("Category", selection: $categorySelection) {
+                        Text("Restaurants")
+                            .tag("restaurants")
+                        Text("Arts")
+                            .tag("arts")
+                        Text("Pets")
+                            .tag("pets")
+                    }
+                }
+            }
+            .padding(.horizontal, 40)
+            
             //Show picker
             Picker ("", selection: $selectedTab) {
                 Text("List")
@@ -38,6 +63,7 @@ struct HomeView: View {
                     .tag(1)
             }
             .pickerStyle(SegmentedPickerStyle())
+            .padding(.horizontal)
             //Show map or list
             if selectedTab == 1 {
                 MapView()
