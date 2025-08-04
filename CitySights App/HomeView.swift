@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @Environment(BusinessModel.self) var model
+    @State var query = ""
     @State var selectedTab = 0
     @State var popularOn = false
     @State var dealsOn = false
@@ -20,10 +21,11 @@ struct HomeView: View {
         @Bindable var model = model
         VStack {
             HStack {
-                TextField("What are you looking for?", text: $model.query)
+                TextField("What are you looking for?", text: $query)
                     .textFieldStyle(.roundedBorder)
                 Button {
-                    // TODO: Implement Query
+                    // Perform Search
+                    model.getBusinesses(query: query, options: getOptionsString(), category: categorySelection)
                 } label: {
                     Text("Go")
                         .padding(.horizontal)
@@ -73,13 +75,25 @@ struct HomeView: View {
             }
         }
         .onAppear {
-            model.getBusinesses()
+            model.getBusinesses(query: nil, options: nil, category: nil)
         }
         .sheet(item: $model.selectedBusiness) { item in
             BusinessDetailView()
         }
     }
+    
+    func getOptionsString() -> String {
+        var optionsArray = [String]()
+        if popularOn {
+            optionsArray.append("hot_and_new")
+        }
+        if dealsOn {
+            optionsArray.append("deals")
+        }
+        return optionsArray.joined(separator: ",")
+    }
 }
+
 
 #Preview {
     HomeView()
