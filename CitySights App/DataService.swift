@@ -30,12 +30,12 @@ struct DataService {
         var endpointUrlString = "https://api.yelp.com/v3/businesses/search?latitude=\(lat)&longitude=\(long)&categories=restaurants&limit=10"
         
         //Add query
-        if let query = query {
-            endpointUrlString.append("&term=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")
+        if query != nil && query != "" {
+            endpointUrlString.append("&term=\(query!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")
         }
         //Add options
-        if let options = options {
-            endpointUrlString.append("&attributes=\(options)")
+        if options != nil && options != "" {
+            endpointUrlString.append("&attributes=\(options!)")
         }
         //Add category
         if let category = category {
