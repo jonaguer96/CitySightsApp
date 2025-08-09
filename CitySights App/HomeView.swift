@@ -10,8 +10,12 @@ import SwiftUI
 struct HomeView: View {
     
     @Environment(BusinessModel.self) var model
-    @State var query = ""
     @State var selectedTab = 0
+    
+    @State var query = ""
+    //@FocusState var queryBoxFocused: Bool
+    @State var showOptions = false
+    
     @State var popularOn = false
     @State var dealsOn = false
     @State var categorySelection = "restaurants"
@@ -19,11 +23,25 @@ struct HomeView: View {
     var body: some View {
         
         @Bindable var model = model
+        
         VStack {
             HStack {
                 TextField("What are you looking for?", text: $query)
                     .textFieldStyle(.roundedBorder)
+                    //.focused($queryBoxFocused)
+                    .simultaneousGesture(
+                            TapGesture().onEnded {
+                                withAnimation {
+                                    showOptions = true
+                                }
+                            }
+                        )
+                        
                 Button {
+                    withAnimation {
+                        showOptions = false
+                        //queryBoxFocused = false
+                    }
                     // Perform Search
                     model.getBusinesses(query: query, options: getOptionsString(), category: categorySelection)
                 } label: {
@@ -38,24 +56,28 @@ struct HomeView: View {
             .padding(.horizontal)
             
             // Query options
-            VStack {
-                Toggle("Popular", isOn: $popularOn)
-                Toggle("Deals", isOn: $dealsOn)
-                
-                HStack {
-                    Text("Categories")
-                    Spacer()
-                    Picker("Category", selection: $categorySelection) {
-                        Text("Restaurants")
-                            .tag("restaurants")
-                        Text("Arts")
-                            .tag("arts")
-                        Text("Pets")
-                            .tag("pets")
+            // Show if textbox is focused
+            if showOptions {
+                VStack {
+                    Toggle("Popular", isOn: $popularOn)
+                    Toggle("Deals", isOn: $dealsOn)
+                    
+                    HStack {
+                        Text("Categories")
+                        Spacer()
+                        Picker("Category", selection: $categorySelection) {
+                            Text("Restaurants")
+                                .tag("restaurants")
+                            Text("Arts")
+                                .tag("arts")
+                            Text("Pets")
+                                .tag("pets")
+                        }
                     }
                 }
+                .padding(.horizontal, 40)
+                .transition(.scale)
             }
-            .padding(.horizontal, 40)
             
             //Show picker
             Picker ("", selection: $selectedTab) {
@@ -69,9 +91,21 @@ struct HomeView: View {
             //Show map or list
             if selectedTab == 1 {
                 MapView()
+                    .onTapGesture {
+                        withAnimation {
+                            showOptions = false
+                            //queryBoxFocused = false
+                        }
+                    }
             }
             else {
                 ListView()
+                    .onTapGesture {
+                        withAnimation {
+                            showOptions = false
+                            //queryBoxFocused = false
+                        }
+                    }
             }
         }
         .onAppear {
