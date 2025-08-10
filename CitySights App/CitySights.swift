@@ -25,7 +25,7 @@ struct CitySights: App {
                 }
                 .onAppear {
                     // If no onboarding is needed; then get user location. 
-                    if needsOnboarding == false {
+                    if needsOnboarding == false && model.locationAuthStatus == .notDetermined {
                         model.getUserLocation()
                     }
                 }
